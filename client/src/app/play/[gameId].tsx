@@ -6,7 +6,7 @@ import { SessionEditor, type EditorInitial } from '@/components/SessionEditor';
 import { EmptyState, Loading, Screen } from '@/components/ui';
 import { useMe } from '@/lib/auth';
 import { clearDraft, loadDraft, useInvalidateDrafts } from '@/lib/drafts';
-import { useGames, useGameSessions, useGamesById } from '@/lib/queries';
+import { useGames, useGameSessions, useGamesById, useSessions } from '@/lib/queries';
 import { defaultTeamName, emptySessionData } from '@/lib/scoring';
 import type { Game, Participant, Session, User } from '@/lib/types';
 
@@ -33,13 +33,15 @@ export default function Play() {
   const gamesQuery = useGames();
   const game = useGamesById().get(gameId);
   const sessions = useGameSessions(gameId);
+  const sessionsLoading = useSessions().isLoading;
   const invalidateDrafts = useInvalidateDrafts();
   const [initial, setInitial] = useState<EditorInitial | null>(null);
   const [resumed, setResumed] = useState(false);
   const [version, setVersion] = useState(0);
 
   useEffect(() => {
-    if (!game || initial) return;
+    // wait for past sessions, so the last players can be pre-filled
+    if (!game || initial || sessionsLoading) return;
     let cancelled = false;
     (async () => {
       const draft = from ? null : await loadDraft(me.id, game.id);
@@ -62,7 +64,7 @@ export default function Play() {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [game?.id]);
+  }, [game?.id, sessionsLoading]);
 
   if (!game) {
     if (gamesQuery.isLoading) return <Loading />;
