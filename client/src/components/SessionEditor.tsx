@@ -23,7 +23,7 @@ import { clearDraft, saveDraft, useInvalidateDrafts } from '@/lib/drafts';
 import { formatDay, formatTime } from '@/lib/format';
 import { errorMessage } from '@/lib/pb';
 import { useSaveSession } from '@/lib/queries';
-import { defaultTeamName, usesTeams, validateSession } from '@/lib/scoring';
+import { defaultTeams, usesTeams, validateSession } from '@/lib/scoring';
 import { modeLabel } from '@/lib/templates';
 import { spacing } from '@/lib/theme';
 import type { Game, Participant, Session, SessionData } from '@/lib/types';
@@ -105,7 +105,7 @@ export function SessionEditor({
   const setParticipants = (participants: Participant[]) => {
     setData((d) => {
       if (!usesTeams(config, d)) return { ...d, participants: participants.map(({ team, ...p }) => p) };
-      const names = d.teams?.length ? d.teams : [defaultTeamName(0), defaultTeamName(1)];
+      const names = d.teams?.length ? d.teams : defaultTeams(config);
       // newcomers join the smallest team
       const next = participants.map((p) => {
         const existing = d.participants.find((x) => x.key === p.key);
@@ -124,7 +124,7 @@ export function SessionEditor({
     setData((d) => ({
       ...d,
       useTeams: on,
-      teams: on ? (d.teams?.length ? d.teams : [defaultTeamName(0), defaultTeamName(1)]) : d.teams,
+      teams: on ? (d.teams?.length ? d.teams : defaultTeams(config)) : d.teams,
       participants: d.participants.map((p, i) => (on ? { ...p, team: p.team ?? i % 2 } : p)),
     }));
 

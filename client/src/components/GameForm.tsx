@@ -49,6 +49,7 @@ export function GameForm({
     setConfig((c) => ({
       ...defaultConfig(mode),
       teams: mode === 'coop' ? undefined : c.teams,
+      teamNames: mode === 'coop' ? undefined : c.teamNames,
       trackDuration: c.trackDuration,
       categories: mode === 'categories' ? (c.categories?.length ? c.categories : defaultConfig(mode).categories) : undefined,
     }));

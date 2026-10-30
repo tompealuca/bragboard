@@ -14,6 +14,16 @@ export const TEAM_LETTERS = 'ABCDEFGH';
 export const teamKey = (index: number) => `t:${index}`;
 export const defaultTeamName = (index: number) => `Team ${TEAM_LETTERS[index] ?? index + 1}`;
 
+/** The name a new session gives team `index`: the game's own team name, else "Team A", "Team B"… */
+export function teamNameFor(config: GameConfig, index: number) {
+  return config.teamNames?.[index]?.trim() || defaultTeamName(index);
+}
+
+/** The two teams a new session starts with. */
+export function defaultTeams(config: GameConfig) {
+  return [teamNameFor(config, 0), teamNameFor(config, 1)];
+}
+
 export function guestKey(name: string) {
   return `g:${name.trim().toLowerCase()}`;
 }
@@ -45,7 +55,7 @@ export function entityKeys(config: GameConfig, data: SessionData): string[] {
 export function entityName(config: GameConfig, data: SessionData, key: string): string {
   if (key.startsWith('t:')) {
     const index = Number(key.slice(2));
-    return data.teams?.[index] || defaultTeamName(index);
+    return data.teams?.[index] || teamNameFor(config, index);
   }
   return data.participants.find((p) => p.key === key)?.name ?? '?';
 }
@@ -256,7 +266,7 @@ export function emptySessionData(config: GameConfig, participants: Participant[]
       useTeams ? { ...p, team: p.team ?? i % 2 } : { key: p.key, name: p.name, userId: p.userId },
     ),
     useTeams,
-    teams: useTeams ? [defaultTeamName(0), defaultTeamName(1)] : undefined,
+    teams: useTeams ? defaultTeams(config) : undefined,
     scores: {},
     rounds: [],
     bids: [],

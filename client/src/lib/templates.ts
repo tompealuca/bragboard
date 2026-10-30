@@ -69,6 +69,8 @@ export const TEMPLATES: GameTemplate[] = [
     config: { mode: 'rounds', teams: 'always', targetScore: 5000 },
   },
   { name: 'Poker', emoji: '♠️', color: '#64748B', tag: 'Cards', config: { mode: 'ranking' } },
+  // last player who doesn't explode wins
+  { name: 'Exploding Kittens', emoji: '💣', color: '#FF9F1C', tag: 'Cards', config: { mode: 'winner' } },
 
   // Board
   { name: 'Catan', emoji: '🏝️', color: '#FF9F1C', tag: 'Board', config: { mode: 'points' } },
@@ -96,6 +98,14 @@ export const TEMPLATES: GameTemplate[] = [
   { name: 'Backgammon', emoji: '🎲', color: '#FF6B5A', tag: 'Board', config: { mode: 'winner' } },
   { name: 'Dixit', emoji: '🐇', color: '#E84393', tag: 'Board', config: { mode: 'points' } },
   { name: 'Pandemic', emoji: '🦠', color: '#14A3A3', tag: 'Board', config: { mode: 'coop' } },
+  // the hand winner scores the pips left in the other hands; partners play as a team
+  {
+    name: 'Dominoes',
+    emoji: '🎲',
+    color: '#64748B',
+    tag: 'Board',
+    config: { mode: 'rounds', targetScore: 100, teams: 'optional' },
+  },
 
   // Dice
   {
@@ -125,16 +135,39 @@ export const TEMPLATES: GameTemplate[] = [
   },
 
   // Party
-  { name: 'Codenames', emoji: '🕵️', color: '#FF6B5A', tag: 'Party', config: { mode: 'winner', teams: 'always' } },
+  {
+    name: 'Codenames',
+    emoji: '🕵️',
+    color: '#FF6B5A',
+    tag: 'Party',
+    config: { mode: 'winner', teams: 'always', teamNames: ['Red', 'Blue'] },
+  },
   { name: 'Charades', emoji: '🎭', color: '#8B5CF6', tag: 'Party', config: { mode: 'points', teams: 'always' } },
   {
     name: 'Werewolf',
     emoji: '🐺',
     color: '#64748B',
     tag: 'Party',
-    config: { mode: 'winner', teams: 'always' },
+    config: { mode: 'winner', teams: 'always', teamNames: ['Villagers', 'Werewolves'] },
+  },
+  // hidden roles: put each player in the side they were dealt, then pick the side that won
+  {
+    name: 'Secret Hitler',
+    emoji: '🗳️',
+    color: '#FF6B5A',
+    tag: 'Party',
+    config: { mode: 'winner', teams: 'always', teamNames: ['Liberals', 'Fascists'] },
+  },
+  {
+    name: 'Avalon',
+    emoji: '⚔️',
+    color: '#6366F1',
+    tag: 'Party',
+    config: { mode: 'winner', teams: 'always', teamNames: ['Good', 'Evil'] },
   },
   { name: 'Quiz night', emoji: '❓', color: '#6366F1', tag: 'Party', config: { mode: 'points', teams: 'optional' } },
+  { name: 'Fibbage', emoji: '🤥', color: '#8B5CF6', tag: 'Party', config: { mode: 'points' } },
+  { name: 'Quiplash', emoji: '💬', color: '#14A3A3', tag: 'Party', config: { mode: 'points' } },
 
   // Sports & video games
   { name: 'Ping pong', emoji: '🏓', color: '#FF9F1C', tag: 'Sports', config: { mode: 'points', teams: 'optional' } },

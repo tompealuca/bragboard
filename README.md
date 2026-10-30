@@ -18,7 +18,7 @@ A score keeper and stats tracker for any board, card, party or video game, on An
 
 ## Features
 
-- **Any game, its own scoring.** Pick a template (Catan, Whist, Uno, 7 Wonders, Chess, Codenames, Mario Kart, Pandemic and 20 more) or set up your own:
+- **Any game, its own scoring.** Pick a template (Catan, Whist, Uno, 7 Wonders, Chess, Codenames, Secret Hitler, Mario Kart, Pandemic and 25 more) or set up your own:
   | Scoring | For games like | Options |
   |---|---|---|
   | Final score | Catan, Scrabble | lowest wins, teams |
@@ -26,7 +26,7 @@ A score keeper and stats tracker for any board, card, party or video game, on An
   | Bids & tricks | Whist, Oh Hell | points for exact bid, per trick, penalty per trick off |
   | Score sheet | 7 Wonders, Yahtzee, Ticket to Ride | your own categories (negative values allowed) |
   | Finishing order | Mario Kart, Poker | tap players in the order they finished |
-  | Winner only | Chess, Codenames | draws, teams |
+  | Winner only | Chess, Codenames, Secret Hitler | draws, teams (with their own names, e.g. Liberals vs Fascists) |
   | Co-op | Pandemic | shared win/loss, optional team score |
   All games can also track play time and notes.
 - **Fast.** New session in 3 taps: **+** → game → scores → Save. Players (and teams) of the last game are pre-filled, and *Play again* starts a rematch. Stats are 2 taps away: Games → game.

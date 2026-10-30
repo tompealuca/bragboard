@@ -4,6 +4,7 @@ import {
   bidPoints,
   computeResults,
   emptySessionData,
+  entityName,
   entityTotals,
   pruneSessionData,
   rankByTotals,
@@ -167,6 +168,15 @@ describe('teams', () => {
     const d = emptySessionData(config, players);
     d.participants = d.participants.map((p) => ({ ...p, team: 0 }));
     expect(validateSession(config, { ...d, scores: { 't:0': 1 } })).toMatch(/two teams/);
+  });
+  it("uses the game's own team names when it has them", () => {
+    const hidden: GameConfig = { mode: 'winner', teams: 'always', teamNames: ['Liberals', 'Fascists'] };
+    const d = emptySessionData(hidden, players);
+    expect(d.teams).toEqual(['Liberals', 'Fascists']);
+    expect(entityName(hidden, { ...d, teams: undefined }, 't:1')).toBe('Fascists');
+    const r = byKey(computeResults(hidden, { ...d, winners: ['t:1'] }));
+    expect(r['u:bob']).toMatchObject({ won: true, team: 1 });
+    expect(emptySessionData(config, players).teams).toEqual(['Team A', 'Team B']);
   });
   it('optional teams only apply when switched on', () => {
     const optional: GameConfig = { mode: 'points', teams: 'optional' };

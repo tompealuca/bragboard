@@ -25,6 +25,8 @@ export interface GameConfig {
   /** rounds: the game ends when someone reaches this total. */
   targetScore?: number | null;
   teams?: TeamsSetting;
+  /** names new sessions give the teams, e.g. ['Liberals', 'Fascists'] (default: Team A, Team B). */
+  teamNames?: string[];
   /** winner: a game can end in a draw. */
   allowDraw?: boolean;
   /** categories: the rows of the score sheet. */

@@ -7,7 +7,7 @@ import { EmptyState, Loading, Screen } from '@/components/ui';
 import { useMe } from '@/lib/auth';
 import { clearDraft, loadDraft, useInvalidateDrafts } from '@/lib/drafts';
 import { useGames, useGameSessions, useGamesById, useSessions } from '@/lib/queries';
-import { defaultTeamName, emptySessionData } from '@/lib/scoring';
+import { emptySessionData, teamNameFor } from '@/lib/scoring';
 import type { Game, Participant, Session, User } from '@/lib/types';
 
 /** A new session starts with the players (and teams) of the last one, so "play again" is one tap. */
@@ -22,7 +22,7 @@ function freshSession(game: Game, me: User, source?: Session): EditorInitial {
     const maxTeam = Math.max(1, ...participants.map((p) => p.team ?? 0));
     data.useTeams = true;
     data.participants = participants;
-    data.teams = Array.from({ length: maxTeam + 1 }, (_, i) => source?.data?.teams?.[i] || defaultTeamName(i));
+    data.teams = Array.from({ length: maxTeam + 1 }, (_, i) => source?.data?.teams?.[i] || teamNameFor(game.config, i));
   }
   return { data, playedAt: new Date(), notes: '', durationMin: null, startedAt: new Date().toISOString() };
 }
