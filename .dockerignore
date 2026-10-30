@@ -1,0 +1,15 @@
+**/node_modules
+**/.expo
+**/dist
+**/.env*
+**/*.log
+.git
+.github
+docs
+deploy
+server/pb_data
+server/pb_public
+server/pocketbase
+server/pocketbase.exe
+server/tests
+server/scripts

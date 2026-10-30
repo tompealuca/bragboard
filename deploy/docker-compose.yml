@@ -1,0 +1,33 @@
+# Bragboard on a Raspberry Pi (or any Linux box with Docker).
+#
+#   cp .env.example .env        # then edit it
+#   docker compose up -d                          # server only, on port 8090
+#   docker compose --profile cloudflare up -d     # + Cloudflare Tunnel (public HTTPS on your domain)
+#
+# Data lives in ./pb_data next to this file. Back it up (see docs/DEPLOY_PI.md).
+
+services:
+  bragboard:
+    image: ghcr.io/tompealuca/bragboard:latest
+    # To build on the Pi itself instead of pulling the prebuilt image:
+    # build: ..
+    container_name: bragboard
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./pb_data:/pb/pb_data
+    environment:
+      - TZ=${TZ:-Europe/Amsterdam}
+
+  # Public HTTPS through Cloudflare, no port forwarding needed. Requires a domain on Cloudflare.
+  # In the Cloudflare dashboard, point the tunnel's public hostname to http://bragboard:8090
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: ["cloudflare"]
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - bragboard

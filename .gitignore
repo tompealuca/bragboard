@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+*.log
+
+# PocketBase binary and local data
+server/pocketbase
+server/pocketbase.exe
+server/pb.zip
+server/pb_data/
+server/pb_public/
+
+# deployment secrets and data
+deploy/.env
+deploy/pb_data/

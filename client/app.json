@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Bragboard",
+    "slug": "bragboard",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "bragboard",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.tompealuca.bragboard",
+      "supportsTablet": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.tompealuca.bragboard",
+      "adaptiveIcon": {
+        "backgroundColor": "#6D4AFF",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "single",
+      "favicon": "./assets/images/favicon.png",
+      "name": "Bragboard",
+      "shortName": "Bragboard",
+      "themeColor": "#6D4AFF",
+      "backgroundColor": "#F5F5F8"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#6D4AFF",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 140
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

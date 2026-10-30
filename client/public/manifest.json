@@ -1,0 +1,15 @@
+{
+  "name": "Bragboard",
+  "short_name": "Bragboard",
+  "description": "Keep score of every game night and see who really is the best.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#6D4AFF",
+  "background_color": "#F5F5F8",
+  "icons": [
+    { "src": "/logo192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/logo512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
