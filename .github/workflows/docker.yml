@@ -16,6 +16,11 @@ permissions:
   contents: read
   packages: write
 
+# A newer push cancels an older build still running, so "latest" is always the newest commit.
+concurrency:
+  group: docker-image
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
